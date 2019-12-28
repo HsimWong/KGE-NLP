@@ -1,0 +1,3 @@
+[submodule "Entity-Relation-Extraction"]
+	path = Entity-Relation-Extraction
+	url = https://github.com/HsimWong/Entity-Relation-Extraction.git
