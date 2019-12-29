@@ -1,9 +1,9 @@
 #!/bin/bash
-function downloadFile {
+downloadFile(){
     local download_dir=$1
     local download_url=$2
     local md5sum=$3
-    let fileName=${download_url##*/}
+    fileName=${download_url##*/}
     if [ -f ${download_dir}/${fileName} ];
     then
         if [ "$md5sum  $fileName" = `md5sum ${download_dir}/${fileName}` ];
