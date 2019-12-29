@@ -13,6 +13,7 @@ downloadFile(){
             rm ${download_dir}/${fileName}
         fi 
     fi 
+    echo "Provision: wget $download_url -O ${download_dir}/${fileName}"
     wget $download_url -O ${download_dir}/${fileName}
 }
 
@@ -21,7 +22,8 @@ SUB_DIR="${PWD}/Entity-Relation-Extraction"
 
 
 echo "Provision: The working path is ${WORKING_DIR}"
-
+echo "Provision: git submodule init"
+git submodule init
 echo "Provision: git submodule update"
 git submodule update
 echo ${SUB_DIR}/raw_data 
