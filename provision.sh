@@ -4,17 +4,26 @@ downloadFile(){
     local download_url=$2
     local md5sum=$3
     fileName=${download_url##*/}
-    if [ -f ${download_dir}/${fileName} ];
+    echo `ls ${download_dir}/${fileName}`
+    echo "Provision: File to be downloaded $download_dir/$fileName"
+    if [ `ls ${download_dir}/${fileName}` = $download_dir/$fileName ];
     then
-        if [ "$md5sum  $fileName" = `md5sum ${download_dir}/${fileName}` ];
-        then 
+	echo "Provision: File exist: $download_dir/$fileName"
+	curmd5sum=`md5sum ${download_dir}/${fileName}`
+        if [ "$md5sum  $fileName" = $curmd5sum ];
+        then
             return
         else
+	    echo "Expect md5sum: $md5sum"
+	    echo "Current md5sum: $curmd5sum"
+	    echo "Provision: existed file broken, removing..."
             rm ${download_dir}/${fileName}
+	    echo "Provision: removal finished, start downloading"
         fi 
     fi 
     echo "Provision: wget $download_url -O ${download_dir}/${fileName}"
-    wget $download_url -O ${download_dir}/${fileName}
+    wget $download_url -O ${download_dir}/${fileName} 
+    
 }
 
 WORKING_DIR=$PWD 
